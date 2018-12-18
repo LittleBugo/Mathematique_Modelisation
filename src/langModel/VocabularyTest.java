@@ -125,7 +125,7 @@ public class VocabularyTest {
 
 		assertTrue(voc.contains("antoine"));
 		assertTrue(voc.contains("Eddy-Malou"));
-
+		//Test de PUSH
 
 	}
 
