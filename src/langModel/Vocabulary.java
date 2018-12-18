@@ -48,7 +48,7 @@ public class Vocabulary implements VocabularyInterface {
 	@Override
 	public void addWord(String word) {
 		this.vocabulary.add(word);
-		
+
 	}
 
 	@Override
@@ -94,6 +94,7 @@ public class Vocabulary implements VocabularyInterface {
 			{
 				writer.write(mots);
 			}
+			writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
