@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 public class VocabularyTest {
 	
-	Vocabulary vocab;
+	private Vocabulary vocab;
 	
 	@Before
 	public void setUp()
@@ -20,9 +20,9 @@ public class VocabularyTest {
 	@Test
 	public void testConstructeur()
 	{
-		Vocabulary vocab=null;
-		vocab = new Vocabulary();
-		assertNotNull("Vocabulaire créé", vocab);
+		Vocabulary voca=null;
+		voca = new Vocabulary();
+		assertNotNull("Vocabulaire créé", voca);
 	}
 	
 	@Test
@@ -36,7 +36,7 @@ public class VocabularyTest {
 	{
 		vocab.addWord("z");
 		vocab.addWord("a");
-		Set<String> tab = new TreeSet<String>();
+		Set<String> tab = new TreeSet<>();
 		tab.add("z");
 		tab.add("a");
 		assertEquals(tab, vocab.getWords());
@@ -93,7 +93,7 @@ public class VocabularyTest {
 	@Test
 	public void testScanNgramSet()
 	{
-		Set<String> ngram = new TreeSet<String>();
+		Set<String> ngram = new TreeSet<>();
 		ngram.add("Malcolm");
 		ngram.add("Hall");
 		ngram.add("Reeze");
@@ -118,11 +118,10 @@ public class VocabularyTest {
 	public void testWriteVocabularyFile()
 	{
 		Vocabulary voc = new Vocabulary();
+		vocab.readVocabularyFile("src/langModel/Test.txt");
 		vocab.addWord("Eddy-Malou");
 		vocab.writeVocabularyFile("src/langModel/Test.txt");
-
 		voc.readVocabularyFile("src/langModel/Test.txt");
-
 		assertTrue(voc.contains("antoine"));
 		assertTrue(voc.contains("Eddy-Malou"));
 		//Test de PUSHPUUUUSH
