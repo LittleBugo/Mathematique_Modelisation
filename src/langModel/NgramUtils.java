@@ -102,9 +102,12 @@ public class NgramUtils {
 
 				if (charactList[i] == ' ')
 				{
-					if(compteurspace==0 )
+					if(compteurspace==0)
+					{
 						System.out.println("JE SUIS RENTRÉ DANS " + pointeur );
 						pointeur = i+1;
+					}
+
 					compteurspace++;
 
 				}
@@ -126,6 +129,7 @@ public class NgramUtils {
 			compteurspace = 0;
 			if(i<sentence.length()-1)
 			{
+				System.out.println("ZPFUIHEPOIHMOZIEH");
 				i=pointeur;
 			}
 
