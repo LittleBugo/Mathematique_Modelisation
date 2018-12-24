@@ -22,8 +22,8 @@ public class NgramUtils {
 	 */
 	public static int getSequenceSize (String sequence) {
 		char[] detail = sequence.toCharArray();
-		int nbWords=0;
-		if(sequence=="" || sequence==" ")
+		int nbWords=1;
+		if(sequence.equals("") || sequence.equals(" "))
 			return 0;
 		for(int i=0; i<sequence.length(); i++)
 			if(detail[i] == ' ')
@@ -94,7 +94,7 @@ public class NgramUtils {
 					compteurspace++;
 				ngram=ngram+charactList[i];
 				i++;
-				if(compteurspace==1)
+				if(compteurspace==0)
 				{
 					pointeur=i;
 				}
@@ -140,21 +140,39 @@ public class NgramUtils {
 		int point=0;
 		int compteur=0;
 		String nram="";
-		while(minOrder<maxOrder) {
+		System.out.println(charactList[sentence.length()-1]);
+
+		while(minOrder<=maxOrder) {
 			while (j < sentence.length() - 1) {
-				while (compteur < minOrder) {
-					if (charactList[j] == ' ')
+
+
+				while (compteur < minOrder ) {
+					if (charactList[j] == ' ' || charactList[j]==charactList[sentence.length()-1])
+					{
+						if(compteur==0)
+							point = j+1;
 						compteur++;
-					nram = nram + charactList[j];
-					j++;
-					if (compteur == 1) {
-						point = j;
+
 					}
+
+					if(!(charactList[j]==' ' && 1 < compteur && compteur <= minOrder)){
+						nram = nram + charactList[j];
+					}
+					System.out.println("J " + j + " " + charactList[j] + " compteur : " + compteur);
+					j++;
+
+
+
 				}
 				resul.add(nram);
-				j = point;
+				System.out.println("'"+nram+"'");
+				nram="";
 				compteur = 0;
+				j=point;
+
 			}
+			System.out.println(" JE SUIS SORTIS :) ");
+			j=0;
 			minOrder++;
 		}
 		return resul;
