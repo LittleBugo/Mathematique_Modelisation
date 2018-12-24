@@ -1,6 +1,7 @@
 package langModel;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +21,14 @@ public class NgramUtils {
 	 * @return the number of words of the given sequence.
 	 */
 	public static int getSequenceSize (String sequence) {
-		//TODO
-		return -1;
+		char[] detail = sequence.toCharArray();
+		int nbWords=0;
+		if(sequence=="" || sequence==" ")
+			return 0;
+		for(int i=0; i<sequence.length(); i++)
+			if(detail[i] == ' ')
+				nbWords++;
+		return nbWords;
 	}
 
 	
@@ -39,7 +46,7 @@ public class NgramUtils {
 	 * @return history of the given n-gram (the length of the history is order-1).  
 	 */
 	public static String getHistory (String ngram, int order) {
-		//TODO
+		//TODO j'ai rien compris mosieur.
 		
 		return "";
 	}
@@ -61,8 +68,42 @@ public class NgramUtils {
 	 * @return the list of n-grams constructed from the sentence.
 	 */
 	public static List<String> decomposeIntoNgrams (String sentence, int order) {
-		//TODO
-		return null;
+		List<String> resultat = new ArrayList<String>();
+		char[] charactList= sentence.toCharArray();
+		int i=0;
+		int pointeur=0;
+		int compteurspace=0;
+		String ngram="";
+		while (i<sentence.length()-1)
+		{
+			while(resultat.size()<order)
+			{
+				while(compteurspace<resultat.size()+1)
+				{
+					if(charactList[i]==' ')
+						compteurspace++;
+					ngram=ngram+charactList[i];
+					i++;
+				}
+				i=0;
+				resultat.add(ngram);
+			}
+			while(compteurspace<order)
+			{
+				if(charactList[i]==' ')
+					compteurspace++;
+				ngram=ngram+charactList[i];
+				i++;
+				if(compteurspace==1)
+				{
+					pointeur=i;
+				}
+			}
+			resultat.add(ngram);
+			i=pointeur;
+			compteurspace=0;
+		}
+		return resultat;
 	}
 	
 	
@@ -93,8 +134,30 @@ public class NgramUtils {
 	 * @return a list of generated n-grams from the sentence.
 	 */
 	public static List<String> generateNgrams (String sentence, int minOrder, int maxOrder) {
-		//TODO
-		return null;
+		List<String> resul = new ArrayList<String>();
+		char[] charactList= sentence.toCharArray();
+		int j=0;
+		int point=0;
+		int compteur=0;
+		String nram="";
+		while(minOrder<maxOrder) {
+			while (j < sentence.length() - 1) {
+				while (compteur < minOrder) {
+					if (charactList[j] == ' ')
+						compteur++;
+					nram = nram + charactList[j];
+					j++;
+					if (compteur == 1) {
+						point = j;
+					}
+				}
+				resul.add(nram);
+				j = point;
+				compteur = 0;
+			}
+			minOrder++;
+		}
+		return resul;
 	}
 	
 	/**
@@ -106,7 +169,7 @@ public class NgramUtils {
 	 * @return the sequence of words with OOV tags according to the vocabulary. 
 	 */
 	public static String getStringOOV(String s, VocabularyInterface vocab) {
-		//TODO
+		//TODO J pô compri non plus
 		return "";
 	}
 
