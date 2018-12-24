@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Set;
 import java.util.TreeSet;
 
+
 public class VocabularyTest {
 	
 	private Vocabulary vocab;

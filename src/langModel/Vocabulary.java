@@ -92,7 +92,7 @@ public class Vocabulary implements VocabularyInterface {
 			
 			for(String mots : this.vocabulary)
 			{
-				writer.write(mots);
+				writer.write(mots + "\n");
 			}
 			writer.close();
 			} catch (IOException e) {
