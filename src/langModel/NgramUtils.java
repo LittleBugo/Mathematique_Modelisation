@@ -68,52 +68,81 @@ public class NgramUtils {
 	 * @return the list of n-grams constructed from the sentence.
 	 */
 	public static List<String> decomposeIntoNgrams (String sentence, int order) {
-		List<String> resultat = new ArrayList<String>();
-		char[] charactList= sentence.toCharArray();
-		int i=0;
-		int pointeur=0;
-		int compteurspace=0;
-		String ngram="";
-		while (i<sentence.length()-1)
-		{
-			while(resultat.size()<order)
-			{
-				while(compteurspace<resultat.size()+1)
-				{
-					if(charactList[i]==' ')
-						compteurspace++;
-					ngram=ngram+charactList[i];
+		List<String> resultat = new ArrayList<String>(); //Résultat qui sera retourné
+		char[] charactList= sentence.toCharArray();		 //Liste des caractères
+		int i=0;										 //Pointeur du tableau (pour le parcourir)
+		int pointeur=0;									 //Pointeur qui permet de revenir en arrière dans le parcours du tableau
+		int compteurspace=0;							 //variable qui compte le nombre de mots (en gros)
+		String ngram="";								 //Mot qui sera ajouté dans le tableau resultat
+		while (i < sentence.length()-1) {
+
+			while(resultat.size()<order-1) {
+				while(charactList[i] != ' ') {
+						ngram = ngram + charactList[i];
+
+					System.out.println("I " + i + " " + charactList[i] + " compteur : " + compteurspace + pointeur);
 					i++;
 				}
-				i=0;
-				resultat.add(ngram);
-			}
-			while(compteurspace<order)
-			{
-				if(charactList[i]==' ')
-					compteurspace++;
-				ngram=ngram+charactList[i];
-				i++;
 				if(compteurspace==0)
+					pointeur = i+1;
+				compteurspace++;
+				i++;
+				resultat.add(ngram);
+				System.out.println("'"+ngram+"'");
+				ngram=ngram+" ";
+				compteurspace = 0;
+				i=0;
+			}
+
+			ngram="";
+			//getchar();
+			compteurspace=0;
+
+			while (compteurspace < order && i < sentence.length()) {
+
+				if (charactList[i] == ' ')
 				{
-					pointeur=i;
+					if(compteurspace==0 )
+						System.out.println("JE SUIS RENTRÉ DANS " + pointeur );
+						pointeur = i+1;
+					compteurspace++;
+
 				}
+					if(charactList[i] != ' ' || (compteurspace<order && compteurspace>0))
+					{
+						ngram = ngram + charactList[i];
+					}
+
+
+				System.out.println("J " + i + " " + charactList[i] + " compteur : " + compteurspace+pointeur);
+				i++;
+
+
+
 			}
 			resultat.add(ngram);
-			i=pointeur;
-			compteurspace=0;
+			System.out.println("'"+ngram+"'");
+			ngram="";
+			compteurspace = 0;
+			if(i<sentence.length()-1)
+			{
+				i=pointeur;
+			}
+
+			//if(i>sentence.length()-1);
+			//return resultat;
 		}
 		return resultat;
 	}
-	
-	
+
+
 	/**
 	 * Method parsing the given sentence and generate all the combinations of ngrams,
 	 * by varying the order n between the given minOrder and maxOrder.
-	 * 
-	 * This method will be used in the NgramCount class for counting the ngrams 
+	 *
+	 * This method will be used in the NgramCount class for counting the ngrams
 	 * occurring in a corpus.
-	 * 
+	 *
 	 * Algorithm (one possible algo...)
 	 * initialize list of ngrams
 	 * for n = minOrder to maxOrder (for each order)
@@ -121,62 +150,38 @@ public class NgramUtils {
 	 *     initialize ngram string parsedSentence
 	 *     for j = i to i+n-1 (create a ngram made of the following sequence of words starting from i to i + the order size)
 	 *       ngram = ngram + " " + sentence[j]
-	 *     add ngramm to list ngrams 
+	 *     add ngramm to list ngrams
 	 * return list ngrams
-	 * 
+	 *
 	 * Example
 	 * given the sentence "a b c d e f g", with minOrder=1 and maxOrder=3, it will result in the following list:
 	 * [a, b, c, d, e, f, g, a b, b c, c d, d e, e f, f g, a b c, b c d, c d e, d e f, e f g]
-	 * 
+	 *
 	 * @param sentence the sentence from which to generate n-grams.
 	 * @param minOrder the minimal order of the n-grams to create.
 	 * @param maxOrder the maximal order of the n-grams to create.
 	 * @return a list of generated n-grams from the sentence.
 	 */
 	public static List<String> generateNgrams (String sentence, int minOrder, int maxOrder) {
-		List<String> resul = new ArrayList<String>();
-		char[] charactList= sentence.toCharArray();
-		int j=0;
-		int point=0;
-		int compteur=0;
-		String nram="";
-		System.out.println(charactList[sentence.length()-1]);
 
-		while(minOrder<=maxOrder) {
-			while (j < sentence.length() - 1) {
-
-
-				while (compteur < minOrder ) {
-					if (charactList[j] == ' ' || charactList[j]==charactList[sentence.length()-1])
-					{
-						if(compteur==0)
-							point = j+1;
-						compteur++;
-
-					}
-
-					if(!(charactList[j]==' ' && 1 < compteur && compteur <= minOrder)){
-						nram = nram + charactList[j];
-					}
-					System.out.println("J " + j + " " + charactList[j] + " compteur : " + compteur);
-					j++;
-
-
-
+		List<String> resultat = NgramUtils.decomposeIntoNgrams(sentence, minOrder);
+		minOrder++;
+		while(minOrder<=maxOrder)
+		{
+			for (String mots: NgramUtils.decomposeIntoNgrams(sentence, minOrder)) {
+				if(!resultat.contains(mots))
+				{
+					resultat.add(mots);
 				}
-				resul.add(nram);
-				System.out.println("'"+nram+"'");
-				nram="";
-				compteur = 0;
-				j=point;
-
 			}
-			System.out.println(" JE SUIS SORTIS :) ");
-			j=0;
+
 			minOrder++;
 		}
-		return resul;
-	}
+
+		return resultat;
+
+		}
+
 	
 	/**
 	 * Method parsing a sequence of words and returning the modified string where

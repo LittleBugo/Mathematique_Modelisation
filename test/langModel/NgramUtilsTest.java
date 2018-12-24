@@ -52,7 +52,7 @@ public class NgramUtilsTest {
 	 */
 	@Test
 	public void testGenerateNgrams() {
-		List<String> temoin = new ArrayList();
+		List<String> temoin = new ArrayList<>();
 		temoin.add("<s>");
 		temoin.add("cette");
 		temoin.add("phrase");
@@ -71,7 +71,7 @@ public class NgramUtilsTest {
 		temoin.add("9 .");
 		temoin.add(". </s>");
 		System.out.println(sentence.length());
-		assertEquals(temoin, NgramUtils.generateNgrams(sentence,2,2));
+		assertEquals(temoin, NgramUtils.generateNgrams(sentence,1,2));
 	}
 
 	
@@ -89,7 +89,17 @@ public class NgramUtilsTest {
 	 */
 	@Test
 	public void testDecomposeIntoNgrams() {
-		fail("Not yet implemented");
+		List<String> temoin = new ArrayList<>();
+		temoin.add("<s>");
+		temoin.add("<s> cette");
+		temoin.add("cette phrase");
+		temoin.add("phrase est");
+		temoin.add("est de");
+		temoin.add("de taille");
+		temoin.add("taille 9");
+		temoin.add("9 .");
+		temoin.add(". </s>");
+		assertEquals(temoin, NgramUtils.decomposeIntoNgrams(sentence,2));
 	}
 	
 	
