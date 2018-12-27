@@ -68,27 +68,27 @@ public class NgramUtils {
 	 * @return the list of n-grams constructed from the sentence.
 	 */
 	public static List<String> decomposeIntoNgrams (String sentence, int order) {
-		List<String> resultat = new ArrayList<String>(); //Résultat qui sera retourné
+		List<String> resultat = new ArrayList<String>(); 	 //Résultat qui sera retourné
 		char[] charactList= sentence.toCharArray();		 //Liste des caractères
 		int i=0;										 //Pointeur du tableau (pour le parcourir)
 		int pointeur=0;									 //Pointeur qui permet de revenir en arrière dans le parcours du tableau
 		int compteurspace=0;							 //variable qui compte le nombre de mots (en gros)
 		String ngram="";								 //Mot qui sera ajouté dans le tableau resultat
-		while (i < sentence.length()-1) {
+		while (i < sentence.length()-1) { 				 //tant qu'il y a du texte,
 
-			while(resultat.size()<order-1) {
-				while(charactList[i] != ' ') {
-						ngram = ngram + charactList[i];
+			while(resultat.size()<order-1) { 			 //Considérer les premières boucles. (qui sont différentes des boucles suivantes)
+				while(charactList[i] != ' ') { 			 //Tant qu'on ne rencontre pas d'espace:
+						ngram = ngram + charactList[i];  // ajoute le caractère (donc le mot)
 
-					System.out.println("I " + i + " " + charactList[i] + " compteur : " + compteurspace + pointeur);
+					//System.out.println("I " + i + " " + charactList[i] + " compteur : " + compteurspace + pointeur);
 					i++;
 				}
-				if(compteurspace==0)
+				if(compteurspace==0) 					 //Lorsque le compteur d'espace est à 0, le pointeur prend la valeur i+1.
 					pointeur = i+1;
 				compteurspace++;
 				i++;
 				resultat.add(ngram);
-				System.out.println("'"+ngram+"'");
+				//System.out.println("'"+ngram+"'");
 				ngram=ngram+" ";
 				compteurspace = 0;
 				i=0;
@@ -97,39 +97,38 @@ public class NgramUtils {
 			ngram="";
 			//getchar();
 			compteurspace=0;
-
+														 //Tant que le compteur d'espace est inférieur à l'ordre et que la phrase n'est pas dépassée
 			while (compteurspace < order && i < sentence.length()) {
 
 				if (charactList[i] == ' ')
 				{
 					if(compteurspace==0)
 					{
-						System.out.println("JE SUIS RENTRÉ DANS " + pointeur );
+						//System.out.println("JE SUIS RENTRÉ DANS " + pointeur );
 						pointeur = i+1;
 					}
 
-					compteurspace++;
+					compteurspace++; 					 //grosso modo ici on compte les mots
 
 				}
-					if(charactList[i] != ' ' || (compteurspace<order && compteurspace>0))
+					if(charactList[i] != ' ' || (compteurspace<order && compteurspace>0)) //On ajoute le caractère que si c'est pas un espace (sauf entre les mots)
 					{
 						ngram = ngram + charactList[i];
 					}
 
 
-				System.out.println("J " + i + " " + charactList[i] + " compteur : " + compteurspace+pointeur);
+				//System.out.println("J " + i + " " + charactList[i] + " compteur : " + compteurspace+pointeur);
 				i++;
-
-
-
 			}
+
+
 			resultat.add(ngram);
-			System.out.println("'"+ngram+"'");
+			//System.out.println("'"+ngram+"'");
 			ngram="";
 			compteurspace = 0;
 			if(i<sentence.length()-1)
 			{
-				System.out.println("ZPFUIHEPOIHMOZIEH");
+				//System.out.println("ZPFUIHEPOIHMOZIEH");
 				i=pointeur;
 			}
 
@@ -167,11 +166,11 @@ public class NgramUtils {
 	 * @return a list of generated n-grams from the sentence.
 	 */
 	public static List<String> generateNgrams (String sentence, int minOrder, int maxOrder) {
-
+												//Décomposition simple avec le minOrder dans un tableau (pour initialiser le tableau)
 		List<String> resultat = NgramUtils.decomposeIntoNgrams(sentence, minOrder);
-		minOrder++;
+		minOrder++;								//Incrémentation de minOrder jusqu'à ce qu'il soit supérieur à maxOrder.
 		while(minOrder<=maxOrder)
-		{
+		{										//Faire de même avec tous les autres order, mais avec un "foreach" pour ajouter les mots un par un.
 			for (String mots: NgramUtils.decomposeIntoNgrams(sentence, minOrder)) {
 				if(!resultat.contains(mots))
 				{
