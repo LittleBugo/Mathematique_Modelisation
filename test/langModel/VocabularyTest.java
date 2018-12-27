@@ -27,7 +27,7 @@ public class VocabularyTest {
 	}
 	
 	@Test
-	public void testsize1()
+	public void testsize()
 	{
 		assertEquals(0, vocab.getSize());
 	}
