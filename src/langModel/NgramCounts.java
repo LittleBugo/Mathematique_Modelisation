@@ -90,43 +90,68 @@ public class NgramCounts implements NgramCountsInterface {
 		this.order=order;
 	}
 
-	
+	/**
+	 * Getter order maximum
+	 *
+	 * @return int : max order possible
+	 */
 	@Override
 	public int getMaximalOrder() {
 		return this.order;
 	}
 
-	
+	/**
+	 * getter NgramCounterSize
+	 * @return int : size onf the counter.
+	 */
 	@Override
 	public int getNgramCounterSize() {
 		return this.ngramCounts.size();
 	}
 
-	
+	/**
+	 * Getter of the Number total of words.
+	 * @return int : nbWOrdsTotal
+	 */
 	@Override
 	public int getTotalWordNumber(){
 		return this.nbWordsTotal;
 	}
-	
-	
+
+	/**
+	 * Getter Of all Ngram of ngramCounts
+	 * @return Set : table of all keys of the map NgramCounts
+	 */
 	@Override
 	public Set<String> getNgrams() {
 		return this.ngramCounts.keySet();
 	}
 
-	
+	/**
+	 *
+	 * @param ngram the n-gram to consider.
+	 * @return int : number of copy of the ngram.
+	 */
 	@Override
 	public int getCounts(String ngram) {
 		return this.ngramCounts.get(ngram);
 	}
-	
 
+	/**
+	 * Increase the number of copy of the ngram.
+	 * @param ngram the n-gram whose counts is to increase.
+	 */
 	@Override
 	public void incCounts(String ngram) {
-		// TODO Auto-generated method stub
+		this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram)+1);
 	}
 
-	
+	/**
+	 * Set the number of copy of each ngram.
+	 *
+	 * @param ngram the n-gram to consider.
+	 * @param counts the counts of the given n-gram.
+	 */
 	@Override
 	public void setCounts(String ngram, int counts) {
 		this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
@@ -135,7 +160,18 @@ public class NgramCounts implements NgramCountsInterface {
 
 	@Override
 	public void scanTextFile(String filePath, VocabularyInterface vocab, int maximalOrder) {
-		// TODO Auto-generated method stub
+		Scanner textFile = null;
+		File fich = new File(filePath);
+		try {
+			textFile = new Scanner(fich);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		if(textFile!=null)
+		{
+
+		}
 	}
 
 
