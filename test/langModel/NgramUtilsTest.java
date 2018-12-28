@@ -80,9 +80,10 @@ public class NgramUtilsTest {
 	 */
 	@Test
 	public void testGetHistory() {
-		fail("Not yet implemented");
-	}
 
+		System.out.println(NgramUtils.getHistory(ngram,2));
+		assertEquals("cet", NgramUtils.getHistory(ngram,2));
+	}
 	
 	/**
 	 * Test method for {@link langModel.NgramUtils#decomposeIntoNgrams(java.lang.String, int)}.
@@ -101,8 +102,17 @@ public class NgramUtilsTest {
 		temoin.add(". </s>");
 		assertEquals(temoin, NgramUtils.decomposeIntoNgrams(sentence,2));
 	}
-	
-	
+
+	/**
+	 * Test method for {@link langModel.NgramUtils#getStringOOV(java.lang.String, langModel.VocabularyInterface)}.
+	 */
+	@Test
+	public void testGetStringOOV() {
+		String s = "";
+		System.out.println(NgramUtils.getStringOOV(s,2));
+		assertEquals("<unk>", NgramUtils.getStringOOV(s,2));
+	}
+
 	/**
 	 * The following code displays a separator 
 	 * between each method output
