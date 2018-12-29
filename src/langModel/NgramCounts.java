@@ -199,7 +199,6 @@ public class NgramCounts implements NgramCountsInterface {
 		}
 	}
 
-
 	public Map<String, Integer> getNgramCounts() {
 		return ngramCounts;
 	}

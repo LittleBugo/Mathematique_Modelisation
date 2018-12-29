@@ -107,6 +107,7 @@ public class Vocabulary implements VocabularyInterface {
 				writer.write(mots + "\n");
 			}
 			writer.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

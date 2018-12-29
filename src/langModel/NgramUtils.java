@@ -225,7 +225,7 @@ public class NgramUtils {
 		minOrder++;
 
 		//Faire de même avec tous les autres order, mais avec un "foreach" pour ajouter les mots un par un.
-		while(minOrder<=maxOrder)
+		while(minOrder <= maxOrder)
 		{
 			for (String mots: NgramUtils.decomposeIntoNgrams(sentence, minOrder))
 			{

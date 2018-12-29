@@ -124,7 +124,7 @@ public class NgramUtilsTest {
 	@Before
 	public void printSeparator()
 	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
+		System.out.println("\n==== " + name.getMethodName() + " =====================");
 	}
 
 }
