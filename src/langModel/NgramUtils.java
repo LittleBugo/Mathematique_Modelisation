@@ -239,7 +239,6 @@ public class NgramUtils {
 		return resultat;
 	}
 
-	
 	/**
 	 * Method parsing a sequence of words and returning the modified string where
 	 * out-of-vocabulary words are replaced with the OOV tag.

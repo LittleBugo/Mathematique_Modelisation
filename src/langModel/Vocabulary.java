@@ -111,5 +111,4 @@ public class Vocabulary implements VocabularyInterface {
 			e.printStackTrace();
 		}
 	}
-
 }

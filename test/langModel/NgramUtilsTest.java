@@ -31,8 +31,7 @@ import java.util.List;
 public class NgramUtilsTest {
 	private String sentence = "<s> cette phrase est de taille 9 . </s>";
 	private String ngram = "où commence l' historique de cet n-gramme";
-	
-	
+
 	/**
 	 * Test method for {@link langModel.NgramUtils#getSequenceSize(java.lang.String)}.
 	 */

@@ -35,18 +35,26 @@ public class NgramCounts implements NgramCountsInterface {
 	 * Constructor.
 	 */
 	public NgramCounts(String fichier){
-		this.order=2; 									//Intialisation de l'order maximum
-		Scanner scan = null;							//Initialisation du Scanner qui va parcourir le document
-		File file = new File(fichier);					//Création du FILE qui est le document
-		List listeDeNgram = new ArrayList();			//Création du tableau qui va permettre de par la suite remplir le map
-		Set encoreUneListe = new TreeSet();				//Création du tableau qui va permettre de compter le nombre de mots.
-		this.ngramCounts = new HashMap<String,Integer>();//Création de la map qui contiendra les ngram avec leurs nombre d'apparition dans le fichier
+        //Intialisation de l'order maximum
+		this.order=2;
+        //Initialisation du Scanner qui va parcourir le document
+		Scanner scan = null;
+        //Création du FILE qui est le document
+		File file = new File(fichier);
+        //Création du tableau qui va permettre de par la suite remplir le map
+		List listeDeNgram = new ArrayList();
+        //Création du tableau qui va permettre de compter le nombre de mots.
+		Set encoreUneListe = new TreeSet();
+        //Création de la map qui contiendra les ngram avec leurs nombre d'apparition dans le fichier
+		this.ngramCounts = new HashMap<String,Integer>();
+
 		try {
 			scan = new Scanner(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		if(scan!=null)
+
+		if(scan != null)
 		{
 			while(scan.hasNextLine())
 			{
@@ -70,12 +78,10 @@ public class NgramCounts implements NgramCountsInterface {
 			if(this.ngramCounts.containsKey(listeDeNgram.get(i)))
 			{
 				this.ngramCounts.replace(nGramActuel, this.ngramCounts.get(nGramActuel), this.ngramCounts.get(nGramActuel)+1 );
-			}
-			else
-			{
+			} else {
 				ngramCounts.put(nGramActuel, 1);
 			}
-			}
+		}
 		this.nbWordsTotal= encoreUneListe.size();
 	}
 
@@ -93,7 +99,7 @@ public class NgramCounts implements NgramCountsInterface {
 	 * @param order the maximal order of n-grams considered.
 	 */
 	private void setMaximalOrder (int order) {
-		this.order=order;
+		this.order = order;
 	}
 
 	/**
@@ -140,10 +146,11 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public int getCounts(String ngram) {
-		if(this.ngramCounts.containsKey(ngram))
+		if(this.ngramCounts.containsKey(ngram)){
 			return this.ngramCounts.get(ngram);
-		else
+		}else{
 			return 0;
+		}
 	}
 
 	/**
@@ -152,10 +159,11 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public void incCounts(String ngram) {
-		if(this.ngramCounts.containsKey(ngram))
-			this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram)+1);
-		else
-			ngramCounts.put(ngram, 1);
+		if(this.ngramCounts.containsKey(ngram)) {
+            this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram) + 1);
+        } else {
+		    ngramCounts.put(ngram, 1);
+		}
 	}
 
 	/**
@@ -166,10 +174,11 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public void setCounts(String ngram, int counts) {
-		if(this.ngramCounts.containsKey(ngram))
-			this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
-		else
+		if(this.ngramCounts.containsKey(ngram)) {
+            this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
+        } else {
 			ngramCounts.put(ngram, counts);
+		}
 	}
 
 
@@ -177,15 +186,16 @@ public class NgramCounts implements NgramCountsInterface {
 	public void scanTextFile(String filePath, VocabularyInterface vocab, int maximalOrder) {
 		Scanner textFile = null;
 		File fich = new File(filePath);
+
 		try {
 			textFile = new Scanner(fich);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		if(textFile!=null)
+		if(textFile != null)
 		{
-            //TODO j'ai la flemme
+            // TODO Auto-generated method stub
 		}
 	}
 
@@ -204,7 +214,7 @@ public class NgramCounts implements NgramCountsInterface {
 	
 	@Override
 	public void readNgramCountsFile(String filePath) {
-		// TODO NTM
+		// TODO Auto-generated method stub
 	}
 
 }
