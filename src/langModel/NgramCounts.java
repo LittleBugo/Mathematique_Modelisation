@@ -149,7 +149,10 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public void incCounts(String ngram) {
-		this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram)+1);
+		if(this.ngramCounts.containsKey(ngram))
+			this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram)+1);
+		else
+			ngramCounts.put(ngram, 1);
 	}
 
 	/**
@@ -160,7 +163,10 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public void setCounts(String ngram, int counts) {
-		this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
+		if(this.ngramCounts.containsKey(ngram))
+			this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
+		else
+			ngramCounts.put(ngram, counts);
 	}
 
 
