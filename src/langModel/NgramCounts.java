@@ -185,7 +185,7 @@ public class NgramCounts implements NgramCountsInterface {
 
 		if(textFile!=null)
 		{
-            //TODO
+            //TODO j'ai la flemme
 		}
 	}
 
@@ -204,7 +204,7 @@ public class NgramCounts implements NgramCountsInterface {
 	
 	@Override
 	public void readNgramCountsFile(String filePath) {
-		// TODO Auto-generated method stub
+		// TODO NTM
 	}
 
 }

@@ -24,19 +24,23 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 	 * Constructor.
 	 */
 	public NaiveLanguageModel(){
-		//TODO
+
+		this.ngramCounts = new NgramCounts();
+		this.vocabulary = new Vocabulary();
+		this.vocabulary.readVocabularyFile("src/langModel/Test.txt");
 	}
 	
 
 	@Override
 	public int getLMOrder() {
-		// TODO Auto-generated method stub
+		// TODO Je ne sais pas ce que c'est
 		return 0;
 	}
 
 	@Override
 	public void setNgramCounts(NgramCountsInterface ngramCounts, VocabularyInterface vocab) {
-		// TODO Auto-generated method stub
+		this.vocabulary = vocab;
+		this.ngramCounts = ngramCounts;
 	}
 
 	@Override
