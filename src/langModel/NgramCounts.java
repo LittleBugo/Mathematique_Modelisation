@@ -35,12 +35,12 @@ public class NgramCounts implements NgramCountsInterface {
 	 * Constructor.
 	 */
 	public NgramCounts(String fichier){
-		this.order=2;
-		Scanner scan = null;
-		File file = new File(fichier);
-		List listeDeNgram = new ArrayList();
-		Set encoreUneListe = new TreeSet();
-		this.ngramCounts = new HashMap<String,Integer>();
+		this.order=2; 									//Intialisation de l'order maximum
+		Scanner scan = null;							//Initialisation du Scanner qui va parcourir le document
+		File file = new File(fichier);					//Création du FILE qui est le document
+		List listeDeNgram = new ArrayList();			//Création du tableau qui va permettre de par la suite remplir le map
+		Set encoreUneListe = new TreeSet();				//Création du tableau qui va permettre de compter le nombre de mots.
+		this.ngramCounts = new HashMap<String,Integer>();//Création de la map qui contiendra les ngram avec leurs nombre d'apparition dans le fichier
 		try {
 			scan = new Scanner(file);
 		} catch (FileNotFoundException e) {
@@ -48,11 +48,17 @@ public class NgramCounts implements NgramCountsInterface {
 		}
 		if(scan!=null)
 		{
-			while(scan.hasNext())
+			while(scan.hasNextLine())
 			{
-				listeDeNgram.add(NgramUtils.generateNgrams(scan.nextLine(), 1, this.order));
-				encoreUneListe.add(NgramUtils.decomposeIntoNgrams(scan.nextLine(),1));
+				String ligne = scan.nextLine();
 
+				for (String nGram: NgramUtils.generateNgrams(ligne, 1, this.order)){
+					listeDeNgram.add(nGram);
+				}
+				for(String gram : NgramUtils.decomposeIntoNgrams(ligne,1))
+				{
+					encoreUneListe.add(gram);
+				}
 			}
 		}
 
@@ -134,7 +140,10 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public int getCounts(String ngram) {
-		return this.ngramCounts.get(ngram);
+		if(this.ngramCounts.containsKey(ngram))
+			return this.ngramCounts.get(ngram);
+		else
+			return 0;
 	}
 
 	/**
@@ -143,7 +152,10 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public void incCounts(String ngram) {
-		this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram)+1);
+		if(this.ngramCounts.containsKey(ngram))
+			this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), this.ngramCounts.get(ngram)+1);
+		else
+			ngramCounts.put(ngram, 1);
 	}
 
 	/**
@@ -154,7 +166,10 @@ public class NgramCounts implements NgramCountsInterface {
 	 */
 	@Override
 	public void setCounts(String ngram, int counts) {
-		this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
+		if(this.ngramCounts.containsKey(ngram))
+			this.ngramCounts.replace(ngram, this.ngramCounts.get(ngram), counts);
+		else
+			ngramCounts.put(ngram, counts);
 	}
 
 
@@ -170,7 +185,7 @@ public class NgramCounts implements NgramCountsInterface {
 
 		if(textFile!=null)
 		{
-
+            //TODO j'ai la flemme
 		}
 	}
 
@@ -189,7 +204,7 @@ public class NgramCounts implements NgramCountsInterface {
 	
 	@Override
 	public void readNgramCountsFile(String filePath) {
-		// TODO Auto-generated method stub
+		// TODO NTM
 	}
 
 }
