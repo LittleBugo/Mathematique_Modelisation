@@ -182,9 +182,6 @@ public class NgramUtils {
 				//System.out.println("ZPFUIHEPOIHMOZIEH");
 				i = pointRetour;
 			}
-
-			//if(i>sentence.length()-1);
-			//return resultat;
 		}
 		System.out.println(resultat);
 		return resultat;

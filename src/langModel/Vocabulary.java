@@ -78,6 +78,7 @@ public class Vocabulary implements VocabularyInterface {
 	public void readVocabularyFile(String filePath) {
 		Scanner fichier = null;
 		File essai = new File(filePath);
+
 		try {
 			fichier = new Scanner(essai);
 		} catch (FileNotFoundException e) {

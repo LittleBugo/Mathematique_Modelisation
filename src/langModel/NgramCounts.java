@@ -209,7 +209,6 @@ public class NgramCounts implements NgramCountsInterface {
 		this.ngramCounts = n.getNgramCounts();
 		this.nbWordsTotal = n.getTotalWordNumber();
 	}
-
 	
 	@Override
 	public void readNgramCountsFile(String filePath) {
