@@ -48,14 +48,17 @@ public class NgramCounts implements NgramCountsInterface {
 		}
 		if(scan!=null)
 		{
-			while(scan.hasNext())
+			while(scan.hasNextLine())
 			{
-				listeDeNgram.add(NgramUtils.generateNgrams(scan.nextLine(), 1, this.order));
-				for(String gram : NgramUtils.decomposeIntoNgrams(scan.nextLine(),1))
+				String ligne = scan.nextLine();
+
+				for (String nGram: NgramUtils.generateNgrams(ligne, 1, this.order)){
+					listeDeNgram.add(nGram);
+				}
+				for(String gram : NgramUtils.decomposeIntoNgrams(ligne,1))
 				{
 					encoreUneListe.add(gram);
 				}
-
 			}
 		}
 

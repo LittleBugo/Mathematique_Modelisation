@@ -29,13 +29,21 @@ public class NgramCountsTest {
     {
         this.testCounts = new NgramCounts();
         this.temoin = new HashMap<String, Integer>();
-        this.temoin.put("<s>", 2);
-        this.temoin.put("Antoine", 1);
-        this.temoin.put("écoute", 2);
-        this.temoin.put("une", 2);
-        this.temoin.put("chanson", 2);
+        this.temoin.put("écoute une", 2);
         this.temoin.put("</s>", 2);
+        this.temoin.put("<s>", 2);
+        this.temoin.put("une chanson", 2);
+        this.temoin.put("chanson", 2);
+        this.temoin.put("<s> Lionel", 1);
+        this.temoin.put("une", 2);
+        this.temoin.put("<s> Antoine", 1);
         this.temoin.put("Lionel", 1);
+        this.temoin.put("Lionel écoute", 1);
+        this.temoin.put("écoute", 2);
+        this.temoin.put("Antoine écoute", 1);
+        this.temoin.put("Antoine", 1);
+        this.temoin.put("chanson </s>", 2);
+
         //this.temoin.put("<s>", 1);
     }
 
@@ -47,7 +55,7 @@ public class NgramCountsTest {
     {
         assertEquals(testCounts.order, 2);
         assertEquals(testCounts.nbWordsTotal, 7);
-        assertEquals(testCounts.ngramCounts, temoin);
+        assertEquals(temoin, testCounts.ngramCounts);
     }
 
     /**
@@ -57,7 +65,9 @@ public class NgramCountsTest {
     public void testConstructeur2()
     {
         NgramCounts test2 = new NgramCounts("data/small_corpus/corpus_fr_test.txt");
-        assertEquals(testCounts, test2);
+        assertEquals(testCounts.order, test2.order);
+        assertEquals(testCounts.nbWordsTotal, test2.nbWordsTotal);
+        assertEquals(testCounts.ngramCounts, test2.ngramCounts);
     }
 
     /**
