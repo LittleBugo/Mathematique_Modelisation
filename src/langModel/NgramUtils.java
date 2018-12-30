@@ -82,6 +82,7 @@ public class NgramUtils {
 				while(order-1 > ngram.length()){
 					ngram = ngram + chartNgram[i];
 				}
+				i++;
 			}
 		}
 		System.out.println(resultat + "d");

@@ -98,6 +98,7 @@ public class NgramCounts implements NgramCountsInterface {
 	 * 
 	 * @param order the maximal order of n-grams considered.
 	 */
+	//C'est en privé, à voir si faut la laisser ou non en privé
 	private void setMaximalOrder (int order) {
 		this.order = order;
 	}

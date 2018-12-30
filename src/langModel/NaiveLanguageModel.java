@@ -33,8 +33,7 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 
 	@Override
 	public int getLMOrder() {
-		// TODO Je ne sais pas ce que c'est
-		return 0;
+		return ngramCounts.getMaximalOrder();
 	}
 
 	@Override
@@ -45,14 +44,30 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 
 	@Override
 	public Double getNgramProb(String ngram) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO A revoir je crois que ce n'est pas bon
+		double nombreTotal=0.0; 			//prend le total des ngramCounts
+		if(ngramCounts.getCounts(ngram)==0) //Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
+			return 0.0;
+		else
+		{
+			for (String ngramm : ngramCounts.getNgrams()) //Parcours de tous les ngrams
+			{
+				nombreTotal += ngramCounts.getCounts(ngramm); //ajoute les comptes
+			}
+			return ngramCounts.getCounts(ngram)/nombreTotal; //retourne le nombre d'apparition du ngram en paramètre divisé par le nombre total d'occurences.
+		}
 	}
 
 	@Override
 	public Double getSentenceProb(String sentence) {
-		// TODO Auto-generated method stub
-		return null;
+		int nombreDeNgrams=0;
+		double probabiliteTotal=0;
+		for (String ngram : NgramUtils.generateNgrams(sentence, 1, ngramCounts.getMaximalOrder()))
+		{
+			probabiliteTotal+=this.getNgramProb(ngram);
+			nombreDeNgrams++;
+		}
+		return probabiliteTotal/nombreDeNgrams;
 	}
 
 }
