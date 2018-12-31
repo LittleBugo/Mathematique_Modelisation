@@ -20,10 +20,18 @@ public class NaiveLanguageModelTest {
      * Test sur le getLMOrder
      */
     @Test
-    public void getLMOrderTest1()
+    public void testGetLMOrder1()
     {
         assertEquals(2, naive.getLMOrder());
     }
 
-
+    @Test
+    public void testSetNgramCounts()
+    {
+        NgramCounts nn = new NgramCounts("data/small_corpus/corpus_fr_train.txt");
+        Vocabulary v = new Vocabulary();
+        assertEquals(7, naive.ngramCounts.getTotalWordNumber());
+        naive.setNgramCounts(nn, v);
+        assertEquals(12, naive.ngramCounts.getTotalWordNumber());
+    }
 }
