@@ -20,7 +20,7 @@ public class NaiveLanguageModelTest {
      * Test sur le getLMOrder
      */
     @Test
-    public void testGetLMOrder1()
+    public void testGetLMOrder()
     {
         assertEquals(2, naive.getLMOrder());
     }
@@ -33,5 +33,27 @@ public class NaiveLanguageModelTest {
         assertEquals(7, naive.ngramCounts.getTotalWordNumber());
         naive.setNgramCounts(nn, v);
         assertEquals(12, naive.ngramCounts.getTotalWordNumber());
+    }
+
+    /**
+     * Test de probabilité lorsque le ngram n'existe pas dans le NgramCounts
+     */
+    @Test
+    public void testGetNgramProb1()
+    {
+
+        //TODO regler le soucis qu'il y a sur la ligne du dessous. (enlever le java.util.Optionnel.of
+        assertEquals(java.util.Optional.of(0.0), this.naive.getNgramProb("Dua Lipa"));
+    }
+
+    /**
+     * Test de probabilité lorsque le ngram existe dans le NgramCounts
+     */
+    @Test
+    public void testGetNgramProb2()
+    {
+        langModel.NaiveLanguageModel naiv = new langModel.NaiveLanguageModel();
+        //TODO idem qu'au dessus je sais pas pourquoi faut mettre ça...
+        assertEquals(java.util.Optional.of(1/7), naive.getNgramProb("Antoine"));
     }
 }

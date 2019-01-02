@@ -24,7 +24,6 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 	 * Constructor.
 	 */
 	public NaiveLanguageModel(){
-
 		this.ngramCounts = new NgramCounts();
 		this.vocabulary = new Vocabulary();
 		this.vocabulary.readVocabularyFile("src/langModel/Test.txt");
