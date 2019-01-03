@@ -19,7 +19,6 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 	 */
 	protected VocabularyInterface vocabulary;
 	
-	
 	/**
 	 * Constructor.
 	 */
@@ -28,7 +27,6 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 		this.vocabulary = new Vocabulary();
 		this.vocabulary.readVocabularyFile("src/langModel/Test.txt");
 	}
-	
 
 	@Override
 	public int getLMOrder() {
@@ -44,16 +42,22 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 	@Override
 	public Double getNgramProb(String ngram) {
 		// TODO A revoir je crois que ce n'est pas bon
-		double nombreTotal=0.0; 			//prend le total des ngramCounts
-		if(ngramCounts.getCounts(ngram)==0) //Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
+		//prend le total des ngramCounts
+		double nombreTotal = 0.0;
+		//Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
+		if(ngramCounts.getCounts(ngram)==0) {
 			return 0.0;
+		}
 		else
 		{
-			for (String ngramm : ngramCounts.getNgrams()) //Parcours de tous les ngrams
+			//Parcours de tous les ngrams
+			for (String ngramm : ngramCounts.getNgrams())
 			{
-				nombreTotal += ngramCounts.getCounts(ngramm); //ajoute les comptes
+				//ajoute les comptes
+				nombreTotal += ngramCounts.getCounts(ngramm);
 			}
-			return ngramCounts.getCounts(ngram)/nombreTotal; //retourne le nombre d'apparition du ngram en paramètre divisé par le nombre total d'occurences.
+			//retourne le nombre d'apparition du ngram en paramètre divisé par le nombre total d'occurences.
+			return ngramCounts.getCounts(ngram)/nombreTotal;
 		}
 	}
 

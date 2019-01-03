@@ -41,9 +41,9 @@ public class NaiveLanguageModelTest {
     @Test
     public void testGetNgramProb1()
     {
-
+        NaiveLanguageModel nv = new NaiveLanguageModel();
         //TODO regler le soucis qu'il y a sur la ligne du dessous. (enlever le java.util.Optionnel.of
-        assertEquals(java.util.Optional.of(0.0), this.naive.getNgramProb("Dua Lipa"));
+        assertEquals(nv, this.naive.getNgramProb("Dua Lipa"));
     }
 
     /**
