@@ -45,11 +45,9 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 		//prend le total des ngramCounts
 		double nombreTotal = 0.0;
 		//Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
-		if(ngramCounts.getCounts(ngram)==0) {
-			return 0.0;
-		}
-		else
-		{
+		if(ngramCounts.getCounts(ngram) == 0) {
+			return nombreTotal;
+		} else {
 			//Parcours de tous les ngrams
 			for (String ngramm : ngramCounts.getNgrams())
 			{
@@ -57,7 +55,7 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 				nombreTotal += ngramCounts.getCounts(ngramm);
 			}
 			//retourne le nombre d'apparition du ngram en paramètre divisé par le nombre total d'occurences.
-			return ngramCounts.getCounts(ngram)/nombreTotal;
+			return (ngramCounts.getCounts(ngram)/nombreTotal);
 		}
 	}
 

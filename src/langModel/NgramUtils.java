@@ -247,7 +247,7 @@ public class NgramUtils {
 	 */
 	public static String getStringOOV(String s, VocabularyInterface vocab)
 	{
-		//TODO J pô compri non plus
+		//TODO : comparer le string en entrée avec le vocab OOV qui se trouve dans 'VocabularyInterface'
 		int nInt = Integer.parseInt("<unk>");
 		String test = "";
 		return test;

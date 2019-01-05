@@ -10,9 +10,11 @@ import org.junit.rules.TestName;
 public class NaiveLanguageModelTest {
 
     private NaiveLanguageModel naive;
+
     @Before
     public void setUp()
     {
+        System.out.println("=== Before - setUp =====================");
         this.naive = new NaiveLanguageModel();
     }
 
@@ -22,7 +24,7 @@ public class NaiveLanguageModelTest {
     @Test
     public void testGetLMOrder()
     {
-        assertEquals(2, naive.getLMOrder());
+        assertEquals(2, this.naive.getLMOrder());
     }
 
     @Test
@@ -30,9 +32,9 @@ public class NaiveLanguageModelTest {
     {
         NgramCounts nn = new NgramCounts("data/small_corpus/corpus_fr_train.txt");
         Vocabulary v = new Vocabulary();
-        assertEquals(7, naive.ngramCounts.getTotalWordNumber());
-        naive.setNgramCounts(nn, v);
-        assertEquals(12, naive.ngramCounts.getTotalWordNumber());
+        assertEquals(7, this.naive.ngramCounts.getTotalWordNumber());
+        this.naive.setNgramCounts(nn, v);
+        assertEquals(12, this.naive.ngramCounts.getTotalWordNumber());
     }
 
     /**
@@ -41,9 +43,9 @@ public class NaiveLanguageModelTest {
     @Test
     public void testGetNgramProb1()
     {
-        NaiveLanguageModel nv = new NaiveLanguageModel();
-        //TODO regler le soucis qu'il y a sur la ligne du dessous. (enlever le java.util.Optionnel.of
-        assertEquals(nv, this.naive.getNgramProb("Dua Lipa"));
+        //double nv = 0.0;
+        //TODO : enlever le java.util.OptionalDouble.of
+        assertEquals(java.util.OptionalDouble.of(0.0), this.naive.getNgramProb("Dua Lipa"));
     }
 
     /**
@@ -53,7 +55,16 @@ public class NaiveLanguageModelTest {
     public void testGetNgramProb2()
     {
         langModel.NaiveLanguageModel naiv = new langModel.NaiveLanguageModel();
-        //TODO idem qu'au dessus je sais pas pourquoi faut mettre ça...
-        assertEquals(java.util.Optional.of(1/7), naive.getNgramProb("Antoine"));
+        //TODO : enlever le java.util.OptionalDouble.of
+        assertEquals(java.util.OptionalDouble.of(1/7), naive.getNgramProb("Antoine"));
+    }
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 }

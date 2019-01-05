@@ -12,11 +12,12 @@ public class LaplaceLanguageModel extends NaiveLanguageModel {
 
 	@Override
 	public Double getNgramProb(String ngram) {
-		double nombreTotal=0.0; 			//prend le total des ngramCounts
-		if(ngramCounts.getCounts(ngram)==0) //Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
-			return 0.0;
-		else
-		{
+		//prend le total des ngramCounts
+		double nombreTotal = 0.0;
+		//Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
+		if(ngramCounts.getCounts(ngram)==0) {
+			return nombreTotal;
+		} else {
 			for (String ngramm : ngramCounts.getNgrams()) //Parcours de tous les ngrams
 			{
 				nombreTotal += ngramCounts.getCounts(ngramm); //ajoute les comptes

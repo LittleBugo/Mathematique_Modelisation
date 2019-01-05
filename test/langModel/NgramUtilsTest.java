@@ -69,7 +69,7 @@ public class NgramUtilsTest {
 		temoin.add("taille 9");
 		temoin.add("9 .");
 		temoin.add(". </s>");
-		System.out.println(sentence.length());
+		System.out.println("La taille de la phrase test est de : " + sentence.length());
 		assertEquals(temoin, NgramUtils.generateNgrams(sentence,1,2));
 	}
 
@@ -107,7 +107,7 @@ public class NgramUtilsTest {
 	 */
 	@Test
 	public void testGetStringOOV() {
-		// TODO
+		// TODO : comparer un string en entrée avec une sortie
 		String s = "";
 		//System.out.println(NgramUtils.getStringOOV(s,2));
 		//assertEquals("<unk>", NgramUtils.getStringOOV(s,2));
