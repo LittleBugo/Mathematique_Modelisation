@@ -41,7 +41,6 @@ public class NaiveLanguageModel implements LanguageModelInterface {
 
 	@Override
 	public Double getNgramProb(String ngram) {
-		// TODO A revoir je crois que ce n'est pas bon
 		//prend le total des ngramCounts
 		double nombreTotal = 0.0;
 		//Si le ngram n'est pas dans le ngramcounts alors on renvoit 0
