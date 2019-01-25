@@ -201,6 +201,8 @@ public class NgramCounts implements NgramCountsInterface {
 				}
 			}
 		}
+
+		this.ngramCounts=newNgramCounts;
 	}
 
 	public Map<String, Integer> getNgramCounts() {
