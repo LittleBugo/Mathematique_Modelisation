@@ -185,18 +185,21 @@ public class NgramCounts implements NgramCountsInterface {
 
 	@Override
 	public void scanTextFile(String filePath, VocabularyInterface vocab, int maximalOrder) {
-		Scanner textFile = null;
-		File fich = new File(filePath);
-
-		try {
-			textFile = new Scanner(fich);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		if(textFile != null)
+		HashMap<String, Integer> newNgramCounts = new HashMap<String, Integer>();
+		for(String sentence : MiscUtils.readTextFileAsStringList(filePath))
 		{
-            // TODO Auto-generated method stub
+			for(String ngram: NgramUtils.generateNgrams(sentence, 1, maximalOrder))
+			{
+				if(vocab.contains(ngram.split(" ")[0]))
+				{
+					if(!newNgramCounts.containsKey(ngram))
+						newNgramCounts.put(ngram, 1);
+					else
+					{
+						newNgramCounts.replace(ngram, newNgramCounts.get(ngram)+1);
+					}
+				}
+			}
 		}
 	}
 
@@ -213,7 +216,12 @@ public class NgramCounts implements NgramCountsInterface {
 	
 	@Override
 	public void readNgramCountsFile(String filePath) {
-		// TODO Auto-generated method stub
+
+		for(String words : MiscUtils.readTextFileAsStringList(filePath))
+		{
+			String [] mots = words.split("\t");
+			this.ngramCounts.put(mots[0], Integer.parseInt(mots[1]));
+		}
 	}
 
 }
